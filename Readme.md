@@ -20,3 +20,11 @@ Passing this off as your own work is expressly forbidden.
 Run with arguments for input and output.
 
 `node parser.js {input_file} {output_file}`
+
+## R summary stats
+
+To run the summary stats open r studio, or whatever you use for r and source the `summaryStats.R` file.
+
+Be sure to run it in this folder or the data will be missing.
+
+You may also have to set the working directory with the `setwd` command.
