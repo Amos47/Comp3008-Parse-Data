@@ -2,13 +2,24 @@
 library(readr)
 
 perUserStats = function(data, title, scheme){
-  hist(table(data$User), main=paste('Histogram of', title, 'Per User for', scheme)); readline('next?');
+  userTable <- table(data$User)
+  print(paste(title, 'Per User for', scheme))
+  print(paste('Mean = ', mean(userTable)))
+  print(paste('Standard deviation = ', sd(userTable)))
+  print(paste('Median = ', median(userTable)))
+  hist(table(data$User), main=paste('Histogram of', title, 'Per User for', scheme))
+  readline('next?');
 }
 
 loginTimeStats = function(data, title, scheme){
   submitTimes = data$`Time to submit (s)`
-  hist(table(submitTimes), main=paste('Histogram of', title, 'for', scheme)); readline('next?')
-  boxplot(submitTimes, main=paste('Boxplot of', title, 'for', scheme), ylab='Time to submit (s)'); readline('next?')
+  timesTable = table(submitTimes)
+  print(paste(title, 'Times for', scheme))
+  print(paste('Mean = ', mean(timesTable)))
+  print(paste('Standard deviation = ', sd(timesTable)))
+  print(paste('Median = ', median(timesTable)))
+  hist(timesTable, main=paste('Histogram of', title, 'Times for', scheme)); readline('next?')
+  boxplot(submitTimes, main=paste('Boxplot of', title, 'Times for', scheme), ylab='Time to submit (s)'); readline('next?')
 }
 
 runForDataset = function(data, title, scheme){
