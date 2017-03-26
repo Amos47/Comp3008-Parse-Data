@@ -1,12 +1,16 @@
 # load csv
 library(readr)
 
+printStats = function(data, title){
+  print(title)
+  print(paste('Mean = ', mean(data)))
+  print(paste('Standard deviation = ', sd(data)))
+  print(paste('Median = ', median(data)))
+}
+
 perUserStats = function(data, title, scheme){
   userTable <- table(data$User)
-  print(paste(title, 'Per User for', scheme))
-  print(paste('Mean = ', mean(userTable)))
-  print(paste('Standard deviation = ', sd(userTable)))
-  print(paste('Median = ', median(userTable)))
+  printStats(userTable, paste(title, 'Per User for', scheme))
   hist(table(data$User), main=paste('Histogram of', title, 'Per User for', scheme))
   readline('next?');
 }
@@ -14,10 +18,7 @@ perUserStats = function(data, title, scheme){
 loginTimeStats = function(data, title, scheme){
   submitTimes = data$`Time to submit (s)`
   timesTable = table(submitTimes)
-  print(paste(title, 'Times for', scheme))
-  print(paste('Mean = ', mean(timesTable)))
-  print(paste('Standard deviation = ', sd(timesTable)))
-  print(paste('Median = ', median(timesTable)))
+  printStats(timesTable, paste(title, 'Times for', scheme))
   hist(timesTable, main=paste('Histogram of', title, 'Times for', scheme)); readline('next?')
   boxplot(submitTimes, main=paste('Boxplot of', title, 'Times for', scheme), ylab='Time to submit (s)'); readline('next?')
 }
@@ -27,7 +28,6 @@ runForDataset = function(data, title, scheme){
   loginTimeStats(data, title, scheme)
 }
 
-## runing the actual stuff
 runForFile = function(file, scheme){
   logins <- read_csv(file)
   successLogins <- subset(logins, Success == 'true')
@@ -38,6 +38,7 @@ runForFile = function(file, scheme){
   runForDataset(failedLogins, 'Failed Logins', scheme)
 }
 
+## runing the actual stuff
 runForFile('./data/Blankpt28_log_out.csv', 'Blank PT')
 runForFile('./data/Imagept28_log_out.csv', 'Image PT')
 runForFile('./data/Text28_log_out.csv', 'Text')
