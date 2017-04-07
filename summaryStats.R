@@ -11,15 +11,14 @@ printStats = function(data, title){
 perUserStats = function(data, title, scheme){
   userTable <- table(data$User)
   printStats(userTable, paste(title, 'Per User for', scheme))
-  hist(table(data$User), main=paste('Histogram of', title, 'Per User for', scheme))
+  hist(table(data$User), main=paste('Histogram of', title, 'Per User for', scheme), xlab=paste(title, 'Per User'))
   readline('next?');
 }
 
 loginTimeStats = function(data, title, scheme){
   submitTimes = data$`Time to submit (s)`
-  timesTable = table(submitTimes)
-  printStats(timesTable, paste(title, 'Times for', scheme))
-  hist(timesTable, main=paste('Histogram of', title, 'Times for', scheme)); readline('next?')
+  printStats(submitTimes, paste(title, 'Times for', scheme))
+  hist(submitTimes, main=paste('Histogram of', title, 'Times for', scheme), xlab='Time to submit (s)'); readline('next?')
   boxplot(submitTimes, main=paste('Boxplot of', title, 'Times for', scheme), ylab='Time to submit (s)'); readline('next?')
 }
 
