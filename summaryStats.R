@@ -2,10 +2,12 @@
 library(readr)
 
 printStats = function(data, title){
+  m <- mean(data)
   print(title)
-  print(paste('Mean = ', mean(data)))
+  print(paste('Mean = ', m))
   print(paste('Standard deviation = ', sd(data)))
   print(paste('Median = ', median(data)))
+  print(t.test(data, mu=m))
 }
 
 perUserStats = function(data, title, scheme){

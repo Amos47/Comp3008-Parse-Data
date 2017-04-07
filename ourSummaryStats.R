@@ -3,9 +3,12 @@ library(readr)
 
 printStats = function(data, title){
   print(title)
-  print(paste('Mean = ', mean(data)))
+  m <- mean(data)
+  print(paste('Mean = ', m))
   print(paste('Standard deviation = ', sd(data)))
   print(paste('Median = ', median(data)))
+  print(t.test(data, mu=m))
+  # t.test(data, mu=m)
 }
 
 perUserStats = function(data, title, scheme){
@@ -16,10 +19,10 @@ perUserStats = function(data, title, scheme){
 }
 
 loginTimeStats = function(data, title, scheme){
-  submitTimes = data$`Time to submit (s)`
+  submitTimes = data$`Time to submit (ms)`
   printStats(submitTimes, paste(title, 'Times for', scheme))
-  hist(submitTimes, main=paste('Histogram of', title, 'Times for', scheme), xlab='Time to submit (s)'); readline('next?')
-  boxplot(submitTimes, main=paste('Boxplot of', title, 'Times for', scheme), ylab='Time to submit (s)'); readline('next?')
+  hist(submitTimes, main=paste('Histogram of', title, 'Times for', scheme), xlab='Time to submit (ms)'); readline('next?')
+  boxplot(submitTimes, main=paste('Boxplot of', title, 'Times for', scheme), ylab='Time to submit (ms)'); readline('next?')
 }
 
 runForDataset = function(data, title, scheme){

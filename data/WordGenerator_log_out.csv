@@ -1,4 +1,4 @@
-User,TrainingTime,Time to submit (s),Status,Input,Password,Service,Broken,Empty1,Empty2
+User,TrainingTime,Time to submit (ms),Status,Input,Password,Service,Broken,Empty1,Empty2
 1000,5393,5687,failure,SDa,StallWorkshops,Bank,0,,
 1000,5393,26125,success,StallWorkshops,StallWorkshops,Bank,0,,
 1000,7406,7670,success,TechnoShattered,TechnoShattered,Email,1,,
