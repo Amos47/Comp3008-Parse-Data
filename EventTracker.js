@@ -17,28 +17,33 @@ function EventTracker(outputStream){
 };
 
 EventTracker.prototype.trackEvent = function (event) {
+  // these are the events that we want to ignore to only check login attempts
   if (["verifytest", "create", "register" ,"reset"].indexOf(event.mode) !== -1){
     return;
   }
+
+  // this makes sure that the current row matches the previous row or the data is reset.
   if (!this.isSameLoginEvent(event)) {
     this.resetData(event);
   }
+
+  // record the start time if this is a login start event
   if (event.event === "start") {
-    // console.log("here");
-    // console.log("start");
     this.startTime = new Date(event.time);
   }
+
+  // if we have a start time and the password is submitted, then record.
   else if(this.startTime && this.isPasswordSubmitEvent(event)){
-    // console.log("submitted");
     this.submitTime = new Date(event.time);
     this.timeToSubmit = (this.submitTime - this.startTime)/1000.0;
   }
+
+  // if the event is a success or fail event then record the times
   else if (this.startTime && (this.isSuccessLogin(event) || this.isFailedLogin(event))) {
-    // console.log("done");
     this.endTime = new Date(event.time);
     this.totalLoginTime = (this.endTime - this.startTime)/1000.0;
     this.success = this.isSuccessLogin(event);
-    // output login event
+    // output login event to file
     if(this.user && this.startTime && this.endTime){
       this.outputData();
       // done with this event
